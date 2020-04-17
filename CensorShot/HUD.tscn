@@ -1,0 +1,12 @@
+[gd_scene format=2]
+
+[node name="HUD" type="Node2D"]
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+margin_right = 94.0
+margin_bottom = 14.0
+value = 100.0
+percent_visible = false
+__meta__ = {
+"_edit_use_anchors_": false
+}

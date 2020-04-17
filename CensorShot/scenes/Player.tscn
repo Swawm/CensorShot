@@ -1,0 +1,233 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://sprites/characters.png" type="Texture" id=1]
+[ext_resource path="res://audio/jump2.ogg" type="AudioStream" id=2]
+[ext_resource path="res://audio/footstep_carpet_000.ogg" type="AudioStream" id=3]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends KinematicBody2D 
+
+
+var ACCELERATION = 200
+var MAX_SPEED = 50
+const FRICTION = 0.25
+const GRAVITY = 1000
+const AIR_RESISTANCE = 0.02
+const JUMP_FORCE = 250
+var sprint = 100
+
+
+onready var sprite = $Sprite
+onready var animation = $Animation
+
+var motion = Vector2.ZERO
+
+func _physics_process(delta):
+	var x_input = Input.get_action_strength(\"ui_right\") - Input.get_action_strength(\"ui_left\")
+	
+	
+	if x_input !=0:
+		if Input.is_action_pressed(\"ui_run\"):
+			animation.play(\"Run_fast (shotgun)\")
+			var ACCELERATION = 300
+			var MAX_SPEED = 100
+			motion.x += x_input * ACCELERATION * delta
+			motion.x = clamp(motion.x, -MAX_SPEED, MAX_SPEED)
+		else:
+			animation.play(\"Run (shotgun)\")
+			motion.x += x_input * ACCELERATION * delta
+			motion.x = clamp(motion.x, -MAX_SPEED, MAX_SPEED)
+		sprite.flip_h = x_input < 0
+	else: 
+		animation.play(\"Idle (shotgun)\")
+		 
+
+	motion.y += GRAVITY * delta
+
+	if is_on_floor():
+		if x_input == 0 :
+			motion.x = lerp(motion.x, 0, FRICTION)
+		if Input.is_action_just_pressed(\"ui_jump\"):
+			motion.y = -JUMP_FORCE
+			get_node(\"jump\").play() 
+	else: 
+		animation.play(\"Jump (shotgun)\")
+# warning-ignore:integer_division
+		if Input.is_action_just_released(\"ui_jump\") and motion.y < -JUMP_FORCE/2:
+# warning-ignore:integer_division
+			motion.y = -JUMP_FORCE/2
+			
+		if x_input == 0:
+			motion.x = lerp(motion.x, 0, AIR_RESISTANCE)
+			
+	if Input.is_action_just_pressed(\"ui_shoot\"):
+		get_node(\"walk\").play()
+	
+	
+	motion = move_and_slide(motion, Vector2.UP)
+"
+
+[sub_resource type="Animation" id=2]
+resource_name = "Idle"
+step = 0.125
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.125, 0.25, 0.375, 0.5, 0.625, 0.75, 0.875 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 8, 9, 10, 11, 8, 9, 10, 11 ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "Idle (shotgun)"
+step = 0.125
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.125, 0.25, 0.375, 0.5, 0.625, 0.75, 0.875 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 32, 33, 34, 35, 32, 33, 34, 32 ]
+}
+
+[sub_resource type="Animation" id=4]
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 2 ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "Jump (shotgun)"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 26 ]
+}
+
+[sub_resource type="Animation" id=6]
+loop = true
+step = 0.125
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.125, 0.25, 0.375, 0.5, 0.625, 0.75, 0.875 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 1, 2, 3, 4, 5, 6, 7, 0 ]
+}
+
+[sub_resource type="Animation" id=7]
+resource_name = "Run (shotgun)"
+loop = true
+step = 0.125
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.125, 0.25, 0.375, 0.5, 0.625, 0.75, 0.875 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 25, 26, 27, 28, 29, 30, 31, 32 ]
+}
+
+[sub_resource type="Animation" id=8]
+loop = true
+step = 0.063
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.063, 0.126, 0.189, 0.252, 0.315, 0.378, 0.441, 0.504, 0.567, 0.63, 0.693, 0.756, 0.819, 0.882, 0.945 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 1, 2, 3, 4, 5, 6, 7, 0, 1, 2, 3, 4, 5, 6, 7, 0 ]
+}
+
+[sub_resource type="Animation" id=9]
+resource_name = "Run_fast (shotgun)"
+loop = true
+step = 0.063
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.063, 0.126, 0.189, 0.252, 0.315, 0.378, 0.441, 0.504, 0.567, 0.63, 0.693, 0.756, 0.819, 0.882, 0.945 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 25, 26, 27, 28, 29, 30, 31, 32, 25, 26, 27, 28, 29, 30, 31, 32 ]
+}
+
+[sub_resource type="RectangleShape2D" id=10]
+extents = Vector2( 4, 7 )
+
+[node name="Player" type="KinematicBody2D"]
+script = SubResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 32, 32 )
+texture = ExtResource( 1 )
+vframes = 6
+hframes = 12
+frame = 25
+
+[node name="Animation" type="AnimationPlayer" parent="."]
+anims/Idle = SubResource( 2 )
+"anims/Idle (shotgun)" = SubResource( 3 )
+anims/Jump = SubResource( 4 )
+"anims/Jump (shotgun)" = SubResource( 5 )
+anims/Run = SubResource( 6 )
+"anims/Run (shotgun)" = SubResource( 7 )
+anims/Run_fast = SubResource( 8 )
+"anims/Run_fast (shotgun)" = SubResource( 9 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2( 32, 33 )
+shape = SubResource( 10 )
+
+[node name="jump" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 2 )
+volume_db = -20.0
+
+[node name="walk" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
+volume_db = -8.0
