@@ -15,7 +15,7 @@ _global_script_class_icons={
 
 [application]
 
-config/name="WAR 2D"
+config/name="CensorShot"
 run/main_scene="res://scenes/main.tscn"
 config/icon="res://icon.png"
 
@@ -58,6 +58,7 @@ ui_shoot={
 
 [rendering]
 
+quality/2d/use_pixel_snap=true
 environment/default_environment="res://default_env.tres"
 
 [tiled_importer]
