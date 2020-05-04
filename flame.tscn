@@ -1,0 +1,49 @@
+[gd_scene load_steps=9 format=2]
+
+[sub_resource type="Gradient" id=1]
+colors = PoolColorArray( 0.607843, 0.737255, 0.0588235, 1, 0.188235, 0.384314, 0.188235, 1 )
+
+[sub_resource type="GradientTexture" id=2]
+gradient = SubResource( 1 )
+
+[sub_resource type="Curve" id=3]
+max_value = 100.0
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.669683, 2.95454 ), 2.91861, 780.0, 1, 0, Vector2( 1, 100 ), 158.292, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=4]
+curve = SubResource( 3 )
+
+[sub_resource type="Curve" id=5]
+min_value = -200.0
+max_value = 500.0
+_data = [ Vector2( 0, 500 ), 0.0, 0.0, 0, 0, Vector2( 0.0927602, -120.455 ), -9030.33, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=6]
+curve = SubResource( 5 )
+
+[sub_resource type="CurveTexture" id=7]
+
+[sub_resource type="ParticlesMaterial" id=8]
+flag_disable_z = true
+spread = 2.0
+gravity = Vector3( -100, 0, 0 )
+initial_velocity = 200.0
+initial_velocity_random = 0.5
+orbit_velocity = 0.05
+orbit_velocity_random = 1.0
+orbit_velocity_curve = SubResource( 7 )
+linear_accel_curve = SubResource( 6 )
+radial_accel = 10.0
+radial_accel_random = 1.0
+damping_curve = SubResource( 4 )
+scale = 0.5
+scale_random = 1.0
+color_ramp = SubResource( 2 )
+
+[node name="flame" type="Node2D"]
+
+[node name="Particles2D" type="Particles2D" parent="."]
+emitting = false
+amount = 700
+local_coords = false
+process_material = SubResource( 8 )
