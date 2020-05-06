@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/hand_rifle.png-1623e77fb4b97ceaa0dece912084d2ae.stex"
+path="res://.import/tileset.png-7cbd9ea72c8ac08da9e6a08a4c1a729d.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/hands/hand_rifle.png"
-dest_files=[ "res://.import/hand_rifle.png-1623e77fb4b97ceaa0dece912084d2ae.stex" ]
+source_file="res://sprites/tilemap/tileset.png"
+dest_files=[ "res://.import/tileset.png-7cbd9ea72c8ac08da9e6a08a4c1a729d.stex" ]
 
 [params]
 

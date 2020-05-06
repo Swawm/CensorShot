@@ -1,35 +1,33 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://sprites/main_char_no_hands.png" type="Texture" id=1]
 [ext_resource path="res://audio/jump2.ogg" type="AudioStream" id=2]
 [ext_resource path="res://audio/footstep_carpet_000.ogg" type="AudioStream" id=3]
 [ext_resource path="res://sprites/background.png" type="Texture" id=4]
-[ext_resource path="res://sprites/hands/hand_flamethrower.png" type="Texture" id=5]
-[ext_resource path="res://flame.tscn" type="PackedScene" id=6]
+[ext_resource path="res://sprites/hands/smg.png" type="Texture" id=5]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends KinematicBody2D 
 
-
-var ACCELERATION = 200
-var MAX_SPEED = 50
+const PROJECTILE_SCENE = preload(\"res://scenes/smg_projectile.tscn\")
 const FRICTION = 0.25
 const GRAVITY = 1000
 const AIR_RESISTANCE = 0.02
 const JUMP_FORCE = 250
+
+var ACCELERATION = 200
+var MAX_SPEED = 50
+var motion = Vector2.ZERO
 var sprint = 100
 
-
 onready var body = $Body
-onready var hands = $Hands
+onready var hands = $Body/Hands
 onready var animation = $Animation
+onready var timer = get_node(\"Body/Hands/Timer\")
 
-var motion = Vector2.ZERO
 
 func _physics_process(delta):
 	var x_input = Input.get_action_strength(\"ui_right\") - Input.get_action_strength(\"ui_left\")
-	
-	
 	if x_input !=0:
 		if Input.is_action_pressed(\"ui_run\"):
 			animation.play(\"Run_fast\")
@@ -44,22 +42,16 @@ func _physics_process(delta):
 
 		body.flip_h = x_input < 0
 		hands.flip_h = x_input < 0
-		
+
 		
 		if body.flip_h == true:
-			#hands.rotation_degrees = clamp(hands.rotation_degrees, -90, 45)
 			hands.offset = Vector2(-4, 3)
 			hands.position = Vector2(3, -2)
-			$Hands/Flame.position.x = -9.543 # Vector2(-7.543, 2.433)
-			#hands.offset = Vector2(-4, 3)
 		else:
 			hands.flip_v = false
-			hands.rotation_degrees = clamp(hands.rotation_degrees, -90, 45)
 			hands.rotation_degrees = 0
 			hands.offset = Vector2(4, 3)
 			hands.position = Vector2(-3, -2)
-			$Hands/Flame.position = Vector2(9.421, 2.459)
-			
 			
 	else: 
 		animation.play(\"Idle\")
@@ -83,23 +75,72 @@ func _physics_process(delta):
 		if x_input == 0:
 			motion.x = lerp(motion.x, 0, AIR_RESISTANCE)
 			
-	if Input.is_action_just_pressed(\"ui_shoot\"):
-		get_node(\"walk\").play()
-	
-	
-	motion = move_and_slide(motion, Vector2.UP)
-	if Input.is_mouse_button_pressed(2):
-		print(hands.rotation_degrees)
-		hands.look_at(get_global_mouse_position())
-		if hands.flip_h == true:
-			hands.rotation_degrees = hands.rotation_degrees - 180
-	else:
-		hands.rotation_degrees = 0
+	if Input.is_action_pressed(\"ui_shoot\"):
+		if timer.is_stopped():
+			shoot()
+			timer.start()
+
 		
-	if Input.is_mouse_button_pressed(1):
-		$Hands/Flame/Particles2D.emitting = true
-	else:
-		$Hands/Flame/Particles2D.emitting = false
+	motion = move_and_slide(motion, Vector2.UP)
+	
+	if body.flip_h == false:
+		if Input.is_action_pressed(\"ui_gun_up\") and Input.is_action_pressed(\"ui_gun_right\"):
+			hands.rotation_degrees = -45
+		elif Input.is_action_pressed(\"ui_gun_down\") and Input.is_action_pressed(\"ui_gun_right\"):
+			hands.rotation_degrees = 45
+		elif Input.is_action_pressed(\"ui_gun_down\"):
+			hands.rotation_degrees = 90
+		elif Input.is_action_pressed(\"ui_gun_up\"):
+			hands.rotation_degrees = -90
+		else: 
+			hands.rotation_degrees = 0
+	elif body.flip_h == true:
+		if Input.is_action_pressed(\"ui_gun_up\") and Input.is_action_pressed(\"ui_gun_left\"):
+			hands.rotation_degrees = 45
+		elif Input.is_action_pressed(\"ui_gun_down\") and Input.is_action_pressed(\"ui_gun_left\"):
+			hands.rotation_degrees = -45
+		elif Input.is_action_pressed(\"ui_gun_down\"):
+			hands.rotation_degrees = -90
+		elif Input.is_action_pressed(\"ui_gun_up\"):
+			hands.rotation_degrees = 90
+		else: 
+			hands.rotation_degrees = 0
+			
+			
+func shoot():
+	var projectile = create_projectile()
+	get_node(\"walk\").play()
+	if body.flip_h == false:
+		$Body/Hands/Position2D.set_position(Vector2(11.212, 2.443))
+		if hands.rotation_degrees == 45:
+			projectile.motion = Vector2(1, 1) * projectile.FIREBALL_SPEED
+		elif hands.rotation_degrees == -45:
+			projectile.motion = Vector2(1, -1) * projectile.FIREBALL_SPEED
+		elif hands.rotation_degrees == -90:
+			projectile.motion = Vector2(0, -1) * projectile.FIREBALL_SPEED
+		elif hands.rotation_degrees == 90:
+			projectile.motion = Vector2(0, 1) * projectile.FIREBALL_SPEED
+	elif body.flip_h == true: 
+		$Body/Hands/Position2D.set_position(Vector2(-11.212, 2.443))
+		projectile.get_node(\"Sprite\").flip_h = true
+		if hands.rotation_degrees == 45:
+			projectile.motion = Vector2(-1, -1) * projectile.FIREBALL_SPEED
+		elif hands.rotation_degrees == -45:
+			projectile.motion = Vector2(-1, 1) * projectile.FIREBALL_SPEED
+		elif hands.rotation_degrees == -90:
+			projectile.motion = Vector2(0, 1) * projectile.FIREBALL_SPEED
+		elif hands.rotation_degrees == 90:
+			projectile.motion = Vector2(0, -1) * projectile.FIREBALL_SPEED
+		else:
+			projectile.motion = Vector2(-1, 0) * projectile.FIREBALL_SPEED
+
+func create_projectile():
+	var projectile = PROJECTILE_SCENE.instance()
+	get_parent().add_child(projectile)
+	projectile.position = get_node(\"Body/Hands/Position2D\").get_global_position()
+	projectile.rotation_degrees = get_node(\"Body/Hands\").get_rotation_degrees()
+	projectile.get_node(\"Sprite\").flip_h = false
+	return projectile
 "
 
 [sub_resource type="Animation" id=2]
@@ -118,7 +159,7 @@ tracks/0/keys = {
 "values": [ 8, 9, 10, 11, 8, 9, 10, 11 ]
 }
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=3]
 length = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("Body:frame")
@@ -133,7 +174,7 @@ tracks/0/keys = {
 "values": [ 2 ]
 }
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=4]
 loop = true
 step = 0.125
 tracks/0/type = "value"
@@ -149,7 +190,7 @@ tracks/0/keys = {
 "values": [ 1, 2, 3, 4, 5, 6, 7, 0 ]
 }
 
-[sub_resource type="Animation" id=8]
+[sub_resource type="Animation" id=5]
 loop = true
 step = 0.063
 tracks/0/type = "value"
@@ -165,35 +206,44 @@ tracks/0/keys = {
 "values": [ 1, 2, 3, 4, 5, 6, 7, 0, 1, 2, 3, 4, 5, 6, 7, 0 ]
 }
 
-[sub_resource type="RectangleShape2D" id=10]
-extents = Vector2( 4, 7 )
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 5.34375, 7.24936 )
 
 [node name="Player" type="KinematicBody2D"]
 position = Vector2( 2, 2 )
 script = SubResource( 1 )
 
 [node name="Body" type="Sprite" parent="."]
+position = Vector2( -0.0460682, 0.184278 )
 texture = ExtResource( 1 )
 vframes = 2
 hframes = 12
+frame = 8
 
-[node name="Hands" type="Sprite" parent="."]
+[node name="Hands" type="Sprite" parent="Body"]
 position = Vector2( -3, -2 )
 texture = ExtResource( 5 )
 offset = Vector2( 4, 3 )
 
-[node name="Flame" parent="Hands" instance=ExtResource( 6 )]
-position = Vector2( 9.42101, 2.45884 )
+[node name="Position2D" type="Position2D" parent="Body/Hands"]
+position = Vector2( 11.2119, 2.44304 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Timer" type="Timer" parent="Body/Hands"]
+wait_time = 0.1
+one_shot = true
 
 [node name="Animation" type="AnimationPlayer" parent="."]
 anims/Idle = SubResource( 2 )
-anims/Jump = SubResource( 4 )
-anims/Run = SubResource( 6 )
-anims/Run_fast = SubResource( 8 )
+anims/Jump = SubResource( 3 )
+anims/Run = SubResource( 4 )
+anims/Run_fast = SubResource( 5 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
-shape = SubResource( 10 )
+position = Vector2( 1, 1 )
+shape = SubResource( 6 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -209,11 +259,9 @@ volume_db = -8.0
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
-visible = false
 motion_mirroring = Vector2( 160, 0 )
 
 [node name="Background" type="Sprite" parent="ParallaxBackground/ParallaxLayer"]
-visible = false
 position = Vector2( 0, 8 )
 texture = ExtResource( 4 )
 centered = false

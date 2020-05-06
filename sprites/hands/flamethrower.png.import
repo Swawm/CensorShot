@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/hand_shotgun.png-c399ca99c159d227fdf516c6761dbb12.stex"
+path="res://.import/flamethrower.png-cbcd9f5bfa502841437816612ecaa8bc.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/hands/hand_shotgun.png"
-dest_files=[ "res://.import/hand_shotgun.png-c399ca99c159d227fdf516c6761dbb12.stex" ]
+source_file="res://sprites/hands/flamethrower.png"
+dest_files=[ "res://.import/flamethrower.png-cbcd9f5bfa502841437816612ecaa8bc.stex" ]
 
 [params]
 

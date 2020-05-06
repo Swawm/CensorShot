@@ -1,14 +1,15 @@
 [gd_scene load_steps=9 format=2]
 
 [sub_resource type="Gradient" id=1]
-colors = PoolColorArray( 0.607843, 0.737255, 0.0588235, 1, 0.188235, 0.384314, 0.188235, 1 )
+offsets = PoolRealArray( 0, 1.33123e-43, 0.174757 )
+colors = PoolColorArray( 0.607843, 0.737255, 0.0588235, 1, 0.545098, 0.67451, 0.0588235, 1, 0.0588235, 0.219608, 0.0588235, 1 )
 
 [sub_resource type="GradientTexture" id=2]
 gradient = SubResource( 1 )
 
 [sub_resource type="Curve" id=3]
 max_value = 100.0
-_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.669683, 2.95454 ), 2.91861, 780.0, 1, 0, Vector2( 1, 100 ), 158.292, 0.0, 0, 0 ]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.452381, 1 ), 0.0, 614.25, 1, 0, Vector2( 1, 94.5455 ), -49.9301, 0.0, 0, 0 ]
 
 [sub_resource type="CurveTexture" id=4]
 curve = SubResource( 3 )
@@ -16,7 +17,7 @@ curve = SubResource( 3 )
 [sub_resource type="Curve" id=5]
 min_value = -200.0
 max_value = 500.0
-_data = [ Vector2( 0, 500 ), 0.0, 0.0, 0, 0, Vector2( 0.0927602, -120.455 ), -9030.33, 0.0, 0, 0 ]
+_data = [ Vector2( 0, 500 ), 0.0, 0.0, 0, 0, Vector2( 0.0873016, -98.1818 ), -1414.97, -111.557, 0, 1, Vector2( 1, -200 ), 0.0, 0.0, 0, 0 ]
 
 [sub_resource type="CurveTexture" id=6]
 curve = SubResource( 5 )
@@ -25,25 +26,26 @@ curve = SubResource( 5 )
 
 [sub_resource type="ParticlesMaterial" id=8]
 flag_disable_z = true
-spread = 2.0
-gravity = Vector3( -100, 0, 0 )
-initial_velocity = 200.0
+spread = 1.0
+gravity = Vector3( -10, 0, 0 )
+initial_velocity = 100.0
 initial_velocity_random = 0.5
 orbit_velocity = 0.05
 orbit_velocity_random = 1.0
-orbit_velocity_curve = SubResource( 7 )
 linear_accel_curve = SubResource( 6 )
 radial_accel = 10.0
 radial_accel_random = 1.0
+radial_accel_curve = SubResource( 7 )
 damping_curve = SubResource( 4 )
-scale = 0.5
+scale = 0.3
 scale_random = 1.0
 color_ramp = SubResource( 2 )
 
 [node name="flame" type="Node2D"]
 
+[node name="Sprite" type="Sprite" parent="."]
+
 [node name="Particles2D" type="Particles2D" parent="."]
-emitting = false
 amount = 700
 local_coords = false
 process_material = SubResource( 8 )

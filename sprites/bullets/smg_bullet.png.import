@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/tilemap.png-281e3f0bdd7259f1c708e9d54035de0e.stex"
+path="res://.import/smg_bullet.png-4c6a245bfbde68543f84403b273874fe.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/tilemap/tilemap.png"
-dest_files=[ "res://.import/tilemap.png-281e3f0bdd7259f1c708e9d54035de0e.stex" ]
+source_file="res://sprites/bullets/smg_bullet.png"
+dest_files=[ "res://.import/smg_bullet.png-4c6a245bfbde68543f84403b273874fe.stex" ]
 
 [params]
 

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/hand_smg.png-deb39c63a677423b45e4e750c5cc34c9.stex"
+path="res://.import/rifle.png-07bcdf82c591d277233dc7b45e151c0f.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/hands/hand_smg.png"
-dest_files=[ "res://.import/hand_smg.png-deb39c63a677423b45e4e750c5cc34c9.stex" ]
+source_file="res://sprites/hands/rifle.png"
+dest_files=[ "res://.import/rifle.png-07bcdf82c591d277233dc7b45e151c0f.stex" ]
 
 [params]
 
