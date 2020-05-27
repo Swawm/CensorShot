@@ -1,0 +1,45 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://sprites/tilemap/tilemap.png" type="Texture" id=1]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends Node2D
+
+export var on_player = ''
+
+onready var parent = $'../'
+
+
+
+
+func get_gun():
+	Player.get_gun(\"res://scenes/SMG.tscn\")
+
+
+func _on_get_item_body_entered(body):
+	if body.name == \"player\":
+		if on_player && parent.has_method(on_player):
+			parent.call(on_player)
+		
+	pass # Replace with function body.
+"
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 8, 4.50093 )
+
+[node name="SMG_pickable" type="Node2D"]
+script = SubResource( 1 )
+on_player = "get_gun"
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 16, 32, 16, 16 )
+
+[node name="get_item" type="Area2D" parent="Sprite"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite/get_item"]
+position = Vector2( 0, 0.536578 )
+shape = SubResource( 2 )
+[connection signal="area_entered" from="Sprite/get_item" to="." method="_on_Area2D_area_entered"]
+[connection signal="body_entered" from="Sprite/get_item" to="." method="_on_Area2D_body_entered"]

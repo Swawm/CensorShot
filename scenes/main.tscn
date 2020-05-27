@@ -1,10 +1,11 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://sprites/tilemap/tilemap.png" type="Texture" id=1]
 [ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://audio/bitbotbom.ogg" type="AudioStream" id=3]
 [ext_resource path="res://sprites/animated_grass.tres" type="Texture" id=4]
 [ext_resource path="res://sprites/tilemap/tileset.png" type="Texture" id=5]
+[ext_resource path="res://scenes/SMG_pickable.tscn" type="PackedScene" id=6]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
@@ -290,9 +291,13 @@ limit_smoothed = true
 smoothing_enabled = true
 smoothing_speed = 3.0
 
+[node name="SMG_pickable" parent="Player" instance=ExtResource( 6 )]
+position = Vector2( 115.906, 68.872 )
+scale = Vector2( 0.75, 0.75 )
+
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )
-volume_db = -10.0
+volume_db = -80.0
 autoplay = true
 
 [node name="TileMap" type="TileMap" parent="."]
