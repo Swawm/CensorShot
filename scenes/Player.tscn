@@ -45,10 +45,12 @@ func _physics_process(delta):
 
 		
 		if body.flip_h == true:
+			$Body/Hands/Position2D.set_position(Vector2(-11.212, 2.443))
 			hands.offset = Vector2(-4, 3)
 			hands.position = Vector2(3, -2)
 		else:
 			hands.flip_v = false
+			$Body/Hands/Position2D.set_position(Vector2(11.212, 2.443))
 			hands.offset = Vector2(4, 3)
 			hands.position = Vector2(-3, -2)
 			
@@ -110,28 +112,26 @@ func shoot():
 	var projectile = create_projectile()
 	get_node(\"walk\").play()
 	if body.flip_h == false:
-		$Body/Hands/Position2D.set_position(Vector2(11.212, 2.443))
 		if hands.rotation_degrees == 45:
-			projectile.motion = Vector2(1, 1) * projectile.FIREBALL_SPEED
+			projectile.motion = Vector2(1, 1) * projectile.BULLET_SPEED
 		elif hands.rotation_degrees == -45:
-			projectile.motion = Vector2(1, -1) * projectile.FIREBALL_SPEED
+			projectile.motion = Vector2(1, -1) * projectile.BULLET_SPEED
 		elif hands.rotation_degrees == -90:
-			projectile.motion = Vector2(0, -1) * projectile.FIREBALL_SPEED
+			projectile.motion = Vector2(0, -1) * projectile.BULLET_SPEED
 		elif hands.rotation_degrees == 90:
-			projectile.motion = Vector2(0, 1) * projectile.FIREBALL_SPEED
+			projectile.motion = Vector2(0, 1) * projectile.BULLET_SPEED
 	elif body.flip_h == true: 
-		$Body/Hands/Position2D.set_position(Vector2(-11.212, 2.443))
 		projectile.get_node(\"Sprite\").flip_h = true
 		if hands.rotation_degrees == 45:
-			projectile.motion = Vector2(-1, -1) * projectile.FIREBALL_SPEED
+			projectile.motion = Vector2(-1, -1) * projectile.BULLET_SPEED
 		elif hands.rotation_degrees == -45:
-			projectile.motion = Vector2(-1, 1) * projectile.FIREBALL_SPEED
+			projectile.motion = Vector2(-1, 1) * projectile.BULLET_SPEED
 		elif hands.rotation_degrees == -90:
-			projectile.motion = Vector2(0, 1) * projectile.FIREBALL_SPEED
+			projectile.motion = Vector2(0, 1) * projectile.BULLET_SPEED
 		elif hands.rotation_degrees == 90:
-			projectile.motion = Vector2(0, -1) * projectile.FIREBALL_SPEED
+			projectile.motion = Vector2(0, -1) * projectile.BULLET_SPEED
 		else:
-			projectile.motion = Vector2(-1, 0) * projectile.FIREBALL_SPEED
+			projectile.motion = Vector2(-1, 0) * projectile.BULLET_SPEED
 
 func create_projectile():
 	var projectile = PROJECTILE_SCENE.instance()

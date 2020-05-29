@@ -1,7 +1,7 @@
 extends Area2D
 
-const FIREBALL_SPEED = 200
-var motion = Vector2(1, 0) * FIREBALL_SPEED	
+const BULLET_SPEED = 200
+var motion = Vector2(1, 0) * BULLET_SPEED	
 
 onready var player = $"/root/Player"
 
@@ -17,4 +17,9 @@ func _physics_process(delta):
 
 func _on_VisibilityNotifier2D_screen_exited():
 	queue_free()
-	pass # Replace with function body.
+
+
+
+func _on_smg_projectile_body_entered(body):
+	queue_free()
+
