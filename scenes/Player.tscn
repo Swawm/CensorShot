@@ -4,7 +4,7 @@
 [ext_resource path="res://audio/jump2.ogg" type="AudioStream" id=2]
 [ext_resource path="res://audio/footstep_carpet_000.ogg" type="AudioStream" id=3]
 [ext_resource path="res://sprites/background.png" type="Texture" id=4]
-[ext_resource path="res://sprites/hands/smg.png" type="Texture" id=5]
+[ext_resource path="res://scenes/Hands.tscn" type="PackedScene" id=5]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends KinematicBody2D 
@@ -219,20 +219,7 @@ vframes = 2
 hframes = 12
 frame = 8
 
-[node name="Hands" type="Sprite" parent="Body"]
-position = Vector2( -3, -2 )
-texture = ExtResource( 5 )
-offset = Vector2( 4, 3 )
-
-[node name="Position2D" type="Position2D" parent="Body/Hands"]
-position = Vector2( 11.2119, 2.44304 )
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="Timer" type="Timer" parent="Body/Hands"]
-wait_time = 0.1
-one_shot = true
+[node name="Hands" parent="Body" instance=ExtResource( 5 )]
 
 [node name="Animation" type="AnimationPlayer" parent="."]
 anims/Idle = SubResource( 2 )

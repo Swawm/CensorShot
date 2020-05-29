@@ -1,0 +1,44 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://sprites/hands/smg.png" type="Texture" id=1]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends Node2D
+
+var gun_id = ''
+onready var gun_sprite = get_node(\".\")
+onready var timer = get_node(\"Timer\")
+var bullets
+
+# warning-ignore:unused_argument
+func _process(_delta):
+	change_gun()
+
+func change_gun():
+	if Input.is_action_just_pressed(\"smg_choose\"):
+		gun_sprite.set_texture(load(\"res://sprites/hands/smg.png\"))
+		gun_id = 'smg'
+		timer.set_wait_time(0.1)
+		
+	elif Input.is_action_just_pressed(\"rifle_choose\"):
+		gun_sprite.set_texture(load(\"res://sprites/hands/rifle.png\"))
+		gun_id = 'rifle'
+		timer.set_wait_time(0.9)
+	pass
+"
+
+[node name="Hands" type="Sprite"]
+position = Vector2( -3, -2 )
+texture = ExtResource( 1 )
+offset = Vector2( 4, 3 )
+script = SubResource( 1 )
+
+[node name="Position2D" type="Position2D" parent="."]
+position = Vector2( 11.2119, 2.44304 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
