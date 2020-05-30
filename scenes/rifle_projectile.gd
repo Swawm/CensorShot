@@ -1,6 +1,6 @@
 extends Area2D
 
-const BULLET_SPEED = 200
+const BULLET_SPEED = 250
 var motion = Vector2(1, 0) * BULLET_SPEED	
 
 onready var player = $"/root/Player"

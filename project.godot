@@ -22,6 +22,7 @@ config/icon="res://icon.png"
 [autoload]
 
 Player="*res://scenes/Player.tscn"
+Hands="*res://scenes/Hands.tscn"
 
 [display]
 

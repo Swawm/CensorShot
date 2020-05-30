@@ -5,35 +5,87 @@
 [sub_resource type="GDScript" id=1]
 script/source = "extends Node2D
 
+const SMG_PROJECTILE_SCENE = preload(\"res://scenes/smg_projectile.tscn\")
+const RIFLE_PROJECTILE_SCENE = preload(\"res://scenes/rifle_projectile.tscn\")
+
 var gun_id = ''
-onready var gun_sprite = get_node(\".\")
+onready var gun_sprite = get_node(\"Sprite\")
 onready var timer = get_node(\"Timer\")
+onready var body = $\"/root/Player/Body\"
+onready var player = $\"/root/Player\"
 var bullets
 
 # warning-ignore:unused_argument
 func _process(_delta):
 	change_gun()
 
+
 func change_gun():
 	if Input.is_action_just_pressed(\"smg_choose\"):
 		gun_sprite.set_texture(load(\"res://sprites/hands/smg.png\"))
 		gun_id = 'smg'
 		timer.set_wait_time(0.1)
-		
+		print('GUN SELECTED:' + gun_id)
 	elif Input.is_action_just_pressed(\"rifle_choose\"):
 		gun_sprite.set_texture(load(\"res://sprites/hands/rifle.png\"))
 		gun_id = 'rifle'
 		timer.set_wait_time(0.9)
+		print('GUN SELECTED:' + gun_id)
 	pass
+
+func create_projectile():
+	var projectile
+	if gun_id == 'smg':
+		projectile = SMG_PROJECTILE_SCENE.instance()
+		print('PROJECTILE' + gun_id)
+		print(projectile)
+	elif gun_id == 'rifle':
+		projectile = RIFLE_PROJECTILE_SCENE.instance()
+		print('PROJECTILE' + gun_id)
+		print(projectile)
+	player.get_parent().add_child(projectile)
+	#get_parent().add_child(projectile)
+	projectile.position = get_node(\"Sprite/Position2D\").get_global_position()
+	projectile.rotation_degrees = get_node(\"Sprite\").get_rotation_degrees()
+	projectile.get_node(\"Sprite\").flip_h = false
+	return projectile
+
+func shoot():
+	var projectile = create_projectile()
+	print(projectile)
+	get_node(\"/root/Player/walk\").play()
+	if body.flip_h == false:
+		if gun_sprite.rotation_degrees == 45:
+			projectile.motion = Vector2(1, 1) * projectile.BULLET_SPEED
+		elif gun_sprite.rotation_degrees == -45:
+			projectile.motion = Vector2(1, -1) * projectile.BULLET_SPEED
+		elif gun_sprite.rotation_degrees == -90:
+			projectile.motion = Vector2(0, -1) * projectile.BULLET_SPEED
+		elif gun_sprite.rotation_degrees == 90:
+			projectile.motion = Vector2(0, 1) * projectile.BULLET_SPEED
+	elif body.flip_h == true: 
+		projectile.get_node(\"Sprite\").flip_h = true
+		if gun_sprite.rotation_degrees == 45:
+			projectile.motion = Vector2(-1, -1) * projectile.BULLET_SPEED
+		elif gun_sprite.rotation_degrees == -45:
+			projectile.motion = Vector2(-1, 1) * projectile.BULLET_SPEED
+		elif gun_sprite.rotation_degrees == -90:
+			projectile.motion = Vector2(0, 1) * projectile.BULLET_SPEED
+		elif gun_sprite.rotation_degrees == 90:
+			projectile.motion = Vector2(0, -1) * projectile.BULLET_SPEED
+		else:
+			projectile.motion = Vector2(-1, 0) * projectile.BULLET_SPEED
 "
 
-[node name="Hands" type="Sprite"]
+[node name="Hands" type="Node2D"]
 position = Vector2( -3, -2 )
-texture = ExtResource( 1 )
-offset = Vector2( 4, 3 )
 script = SubResource( 1 )
 
-[node name="Position2D" type="Position2D" parent="."]
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+offset = Vector2( 4, 3 )
+
+[node name="Position2D" type="Position2D" parent="Sprite"]
 position = Vector2( 11.2119, 2.44304 )
 __meta__ = {
 "_edit_lock_": true

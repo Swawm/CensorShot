@@ -9,7 +9,7 @@
 [sub_resource type="GDScript" id=1]
 script/source = "extends KinematicBody2D 
 
-const PROJECTILE_SCENE = preload(\"res://scenes/smg_projectile.tscn\")
+
 const FRICTION = 0.25
 const GRAVITY = 1000
 const AIR_RESISTANCE = 0.02
@@ -21,7 +21,9 @@ var motion = Vector2.ZERO
 var sprint = 100
 
 onready var body = $Body
-onready var hands = $Body/Hands
+
+onready var gun_sprite = $Body/Hands/Sprite
+onready var gun = $Body/Hands
 onready var animation = $Animation
 onready var timer = get_node(\"Body/Hands/Timer\")
 
@@ -41,18 +43,19 @@ func _physics_process(delta):
 			motion.x = clamp(motion.x, -MAX_SPEED, MAX_SPEED)
 
 		body.flip_h = x_input < 0
-		hands.flip_h = x_input < 0
+		gun_sprite.flip_h = x_input < 0
 
 		
 		if body.flip_h == true:
-			$Body/Hands/Position2D.set_position(Vector2(-11.212, 2.443))
-			hands.offset = Vector2(-4, 3)
-			hands.position = Vector2(3, -2)
+			$Body/Hands/Sprite/Position2D.set_position(Vector2(-11.212, 2.443))
+			gun_sprite.offset = Vector2(-4, 3)
+			gun.position = Vector2(3, -2)
 		else:
-			hands.flip_v = false
-			$Body/Hands/Position2D.set_position(Vector2(11.212, 2.443))
-			hands.offset = Vector2(4, 3)
-			hands.position = Vector2(-3, -2)
+			gun_sprite.flip_v = false
+			$Body/Hands/Sprite/Position2D.set_position(Vector2(11.212, 2.443))
+			gun_sprite.offset = Vector2(4, 3)
+			gun.position = Vector2(-3, -2)
+			
 			
 	else: 
 		animation.play(\"Idle\")
@@ -78,7 +81,7 @@ func _physics_process(delta):
 			
 	if Input.is_action_pressed(\"ui_shoot\"):
 		if timer.is_stopped():
-			shoot()
+			gun.shoot()
 			timer.start()
 
 		
@@ -86,60 +89,26 @@ func _physics_process(delta):
 	
 	if body.flip_h == false:
 		if Input.is_action_pressed(\"ui_gun_up\") and Input.is_action_pressed(\"ui_gun_right\"):
-			hands.rotation_degrees = -45
+			gun_sprite.rotation_degrees = -45
 		elif Input.is_action_pressed(\"ui_gun_down\") and Input.is_action_pressed(\"ui_gun_right\"):
-			hands.rotation_degrees = 45
+			gun_sprite.rotation_degrees = 45
 		elif Input.is_action_pressed(\"ui_gun_down\"):
-			hands.rotation_degrees = 90
+			gun_sprite.rotation_degrees = 90
 		elif Input.is_action_pressed(\"ui_gun_up\"):
-			hands.rotation_degrees = -90
+			gun_sprite.rotation_degrees = -90
 		else: 
-			hands.rotation_degrees = 0
+			gun_sprite.rotation_degrees = 0
 	elif body.flip_h == true:
 		if Input.is_action_pressed(\"ui_gun_up\") and Input.is_action_pressed(\"ui_gun_left\"):
-			hands.rotation_degrees = 45
+			gun_sprite.rotation_degrees = 45
 		elif Input.is_action_pressed(\"ui_gun_down\") and Input.is_action_pressed(\"ui_gun_left\"):
-			hands.rotation_degrees = -45
+			gun_sprite.rotation_degrees = -45
 		elif Input.is_action_pressed(\"ui_gun_down\"):
-			hands.rotation_degrees = -90
+			gun_sprite.rotation_degrees = -90
 		elif Input.is_action_pressed(\"ui_gun_up\"):
-			hands.rotation_degrees = 90
+			gun_sprite.rotation_degrees = 90
 		else: 
-			hands.rotation_degrees = 0
-			
-			
-func shoot():
-	var projectile = create_projectile()
-	get_node(\"walk\").play()
-	if body.flip_h == false:
-		if hands.rotation_degrees == 45:
-			projectile.motion = Vector2(1, 1) * projectile.BULLET_SPEED
-		elif hands.rotation_degrees == -45:
-			projectile.motion = Vector2(1, -1) * projectile.BULLET_SPEED
-		elif hands.rotation_degrees == -90:
-			projectile.motion = Vector2(0, -1) * projectile.BULLET_SPEED
-		elif hands.rotation_degrees == 90:
-			projectile.motion = Vector2(0, 1) * projectile.BULLET_SPEED
-	elif body.flip_h == true: 
-		projectile.get_node(\"Sprite\").flip_h = true
-		if hands.rotation_degrees == 45:
-			projectile.motion = Vector2(-1, -1) * projectile.BULLET_SPEED
-		elif hands.rotation_degrees == -45:
-			projectile.motion = Vector2(-1, 1) * projectile.BULLET_SPEED
-		elif hands.rotation_degrees == -90:
-			projectile.motion = Vector2(0, 1) * projectile.BULLET_SPEED
-		elif hands.rotation_degrees == 90:
-			projectile.motion = Vector2(0, -1) * projectile.BULLET_SPEED
-		else:
-			projectile.motion = Vector2(-1, 0) * projectile.BULLET_SPEED
-
-func create_projectile():
-	var projectile = PROJECTILE_SCENE.instance()
-	get_parent().add_child(projectile)
-	projectile.position = get_node(\"Body/Hands/Position2D\").get_global_position()
-	projectile.rotation_degrees = get_node(\"Body/Hands\").get_rotation_degrees()
-	projectile.get_node(\"Sprite\").flip_h = false
-	return projectile
+			gun_sprite.rotation_degrees = 0
 "
 
 [sub_resource type="Animation" id=2]
