@@ -15,14 +15,6 @@ onready var body = $\"/root/Player/Body\"
 onready var player = $\"/root/Player\"
 var bullets = 0
 
-class weapon: 
-	var bullets
-	var gun_sprite
-	var gun_id
-	func _init(bullets, gun_sprite, gun_id):
-		pass
-
-	
 # warning-ignore:unused_argument
 func _process(_delta):
 	change_gun()
@@ -31,20 +23,14 @@ func _process(_delta):
 
 func change_gun():
 	if Input.is_action_just_pressed(\"smg_choose\"):
-		var gun = weapon.new(32, load(\"res://sprites/hands/smg.png\"), 'smg')
-		gun_sprite.set_texture = gun.gun_sprite
-		#gun_sprite.set_texture(load(\"res://sprites/hands/smg.png\"))
-		#gun_id = 'smg'
-		#bullets = 32
-		print(gun)
+		gun_sprite.set_texture(load(\"res://sprites/hands/smg.png\"))
+		gun_id = 'smg'
+		bullets = 32
 		timer.set_wait_time(0.1)
 	elif Input.is_action_just_pressed(\"rifle_choose\"):
-		var gun = weapon.new(5, load(\"res://sprites/hands/rifle.png\"), 'rifle')
-		print (gun)
-		gun_sprite.set_texture = gun.gun_sprite
-		#gun_sprite.set_texture(load(\"res://sprites/hands/rifle.png\"))
-		#gun_id = 'rifle'
-		#bullets = 5
+		gun_sprite.set_texture(load(\"res://sprites/hands/rifle.png\"))
+		gun_id = 'rifle'
+		bullets = 5
 		timer.set_wait_time(0.9)
 	return bullets
 
