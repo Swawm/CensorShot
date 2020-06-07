@@ -3,9 +3,6 @@ extends Area2D
 const BULLET_SPEED = 200
 var motion = Vector2(1, 0) * BULLET_SPEED	
 
-onready var player = $"/root/Player"
-
-
 func _ready():
 	set_process(true)
 	

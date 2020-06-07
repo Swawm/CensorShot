@@ -292,7 +292,7 @@ smoothing_speed = 3.0
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )
-volume_db = -10.0
+volume_db = -80.0
 autoplay = true
 
 [node name="TileMap" type="TileMap" parent="."]
