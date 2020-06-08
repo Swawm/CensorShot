@@ -112,7 +112,7 @@ script = SubResource( 1 )
 offset = Vector2( 4, 3 )
 
 [node name="Position2D" type="Position2D" parent="Sprite"]
-position = Vector2( 12.2, 2.443 )
+position = Vector2( 13.2, 2.443 )
 __meta__ = {
 "_edit_lock_": true
 }
