@@ -267,8 +267,7 @@ frame = 13
 [node name="Hands" parent="Body" instance=ExtResource( 5 )]
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-visible = false
-polygon = PoolVector2Array( 0, 7, -4, 7, -4, 3, -6, 1, -6, -1, -4, -4, -2, -4, -2, -7, 6, -7, 6, -4, 7, -1, 7, 1, 4, 3, 4, 7, 0, 7 )
+polygon = PoolVector2Array( 0, 8, -3, 8, -4, 3, -6, 1, -6, -1, -4, -4, -2, -4, -2, -7, 7, -7, 7, -4, 8, -1, 8, 1, 5, 3, 4, 8, 0, 8 )
 __meta__ = {
 "_edit_lock_": true
 }

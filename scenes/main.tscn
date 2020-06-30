@@ -279,7 +279,7 @@ points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
 [node name="World" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
-position = Vector2( 110.094, 56.128 )
+position = Vector2( 110, 56 )
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 position = Vector2( 12.1689, 5.02847 )
@@ -292,7 +292,7 @@ smoothing_speed = 3.0
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )
-volume_db = -80.0
+volume_db = -10.0
 autoplay = true
 
 [node name="TileMap" type="TileMap" parent="."]
