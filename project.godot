@@ -21,7 +21,7 @@ config/icon="res://icon.png"
 
 [autoload]
 
-Player="*res://scenes/Player.tscn"
+G="*res://scenes/main.gd"
 Hands="*res://scenes/Hands.tscn"
 
 [display]
@@ -35,7 +35,7 @@ window/stretch/aspect="keep"
 
 [editor_plugins]
 
-enabled=PoolStringArray(  )
+enabled=PoolStringArray( "EXP-System-Dialog" )
 
 [input]
 

@@ -36,7 +36,6 @@ position = Vector2( -0.0460682, 0.184278 )
 texture = ExtResource( 1 )
 flip_h = true
 hframes = 4
-frame = 3
 
 [node name="Animation" type="AnimationPlayer" parent="."]
 anims/Idle = SubResource( 2 )

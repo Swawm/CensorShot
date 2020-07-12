@@ -279,22 +279,14 @@ points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
 
 [node name="World" type="Node2D"]
 
-[node name="Player" parent="." instance=ExtResource( 2 )]
-position = Vector2( 110, 56 )
-
-[node name="Camera2D" type="Camera2D" parent="Player"]
-position = Vector2( 12.1689, 5.02847 )
-scale = Vector2( 1, 0.610807 )
-current = true
-zoom = Vector2( 0.5, 0.5 )
-limit_smoothed = true
-smoothing_enabled = true
-smoothing_speed = 3.0
-
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )
 volume_db = -10.0
 autoplay = true
+
+[node name="Dark Character" parent="." instance=ExtResource( 6 )]
+position = Vector2( 268, 88 )
+z_index = -1
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource( 11 )
@@ -302,6 +294,15 @@ cell_size = Vector2( 16, 16 )
 format = 1
 tile_data = PoolIntArray( 393219, 0, 0, 393225, 6, 0, 393226, 6, 0, 393227, 6, 0, 393228, 6, 0, 393231, 0, 0, 393232, 0, 0, 458755, 0, 0, 458756, 2, 0, 458761, 7, 0, 458762, 8, 0, 458763, 8, 0, 458764, 10, 0, 458767, 0, 0, 524290, 0, 0, 524291, 0, 0, 524292, 0, 0, 524293, 0, 0, 524294, 7, 0, 524295, 8, 0, 524296, 8, 0, 524297, 8, 0, 524298, 8, 0, 524299, 8, 0, 524300, 8, 0, 524301, 8, 0, 524302, 8, 0, 524303, 0, 0, 524304, 0, 0, 524305, 0, 0, 524306, 0, 0, 524307, 0, 0, 524308, 0, 0, 524309, 0, 0, 524310, 0, 0, 524311, 0, 0, 524312, 0, 0, 524313, 0, 0, 524314, 0, 0, 524315, 0, 0, 524316, 0, 0, 524317, 0, 0, 524318, 0, 0, 524319, 0, 0, 524320, 0, 0, 524321, 0, 0, 524322, 0, 0, 524323, 0, 0, 524324, 0, 0, 524325, 0, 0, 524326, 0, 0, 524327, 0, 0, 524328, 0, 0, 524329, 0, 0, 524330, 0, 0, 524331, 0, 0 )
 
-[node name="Dark Character" parent="." instance=ExtResource( 6 )]
-position = Vector2( 245, 88 )
-z_index = -1
+[node name="Player" parent="." instance=ExtResource( 2 )]
+position = Vector2( 111, 56 )
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+visible = false
+position = Vector2( 12.1689, 5.02847 )
+scale = Vector2( 1, 0.610807 )
+current = true
+zoom = Vector2( 0.5, 0.5 )
+limit_smoothed = true
+smoothing_enabled = true
+smoothing_speed = 3.0

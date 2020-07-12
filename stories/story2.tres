@@ -1,0 +1,217 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://addons/EXP-System-Dialog/Resource_EditorStory/EXP_EditorStory.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+TYPE = "EXP_Story_editor"
+names = {
+"test": 1,
+"test2": 2,
+"test3": 3
+}
+story = {
+1: {
+"available_nid": [  ],
+"groups": [  ],
+"human_readable_description": "test",
+"name": "test",
+"nodes": {
+1: {
+"graph_offset": Vector2( 40, 40 ),
+"links": {
+0: 2
+},
+"rect_size": Vector2( 324, 137 ),
+"slot_amount": 1,
+"text": "<start>",
+"type": "line"
+},
+2: {
+"graph_offset": Vector2( 560, 40 ),
+"links": {
+0: 3
+},
+"rect_size": Vector2( 324, 137 ),
+"slot_amount": 1,
+"text": "<speaker>Swawm</speaker>
+<dialog>Test</dialog>",
+"type": "line"
+},
+3: {
+"graph_offset": Vector2( 560, 240 ),
+"links": {
+0: 4
+},
+"rect_size": Vector2( 324, 137 ),
+"slot_amount": 1,
+"text": "<speaker>Swawm</speaker>
+<dialog>Tost</dialog>",
+"type": "line"
+},
+4: {
+"graph_offset": Vector2( 100, 480 ),
+"links": {
+0: 5
+},
+"rect_size": Vector2( 324, 137 ),
+"slot_amount": 1,
+"text": "<speaker>Swawm</speaker>
+<dialog>This is a sample big text to test capacity of my literator and narrator skill</dialog>",
+"type": "line"
+},
+5: {
+"graph_offset": Vector2( 600, 460 ),
+"links": {
+
+},
+"rect_size": Vector2( 324, 137 ),
+"slot_amount": 1,
+"text": "<end>",
+"type": "line"
+}
+}
+},
+2: {
+"available_nid": [  ],
+"groups": [ "" ],
+"human_readable_description": "Injection",
+"name": "test2",
+"nodes": {
+1: {
+"graph_offset": Vector2( 60, -540 ),
+"links": {
+0: 3
+},
+"rect_size": Vector2( 324, 137 ),
+"slot_amount": 1,
+"text": "<start>",
+"type": "line"
+},
+2: {
+"graph_offset": Vector2( 580, -240 ),
+"links": {
+
+},
+"rect_size": Vector2( 324, 137 ),
+"slot_amount": 1,
+"text": "<end>",
+"type": "line"
+},
+3: {
+"graph_offset": Vector2( 80, -360 ),
+"links": {
+0: 4
+},
+"rect_size": Vector2( 324, 137 ),
+"slot_amount": 1,
+"text": "<speaker>Swawm</speaker>
+<dialog> Test variable <variable>PI</variable> </dialog>",
+"type": "line"
+},
+4: {
+"graph_offset": Vector2( 120, -200 ),
+"links": {
+0: 2
+},
+"rect_size": Vector2( 324, 137 ),
+"slot_amount": 1,
+"text": "<speaker>Swawm</speaker>
+<dialog> Test variable <variable>SYSTEM</variable> </dialog>",
+"type": "line"
+}
+}
+},
+3: {
+"available_nid": [  ],
+"groups": [  ],
+"human_readable_description": "variables",
+"name": "test3",
+"nodes": {
+1: {
+"graph_offset": Vector2( -360, -480 ),
+"links": {
+0: 2
+},
+"rect_size": Vector2( 324, 137 ),
+"slot_amount": 1,
+"text": "<start>",
+"type": "line"
+},
+2: {
+"graph_offset": Vector2( -380, -220 ),
+"links": {
+0: 3
+},
+"rect_size": Vector2( 324, 137 ),
+"slot_amount": 1,
+"text": "<speaker>Swawm</speaker>
+<dialog>Wow</dialog>
+",
+"type": "line"
+},
+3: {
+"graph_offset": Vector2( -340, 20 ),
+"links": {
+0: 4,
+1: 5,
+2: 6
+},
+"rect_size": Vector2( 324, 137 ),
+"slot_amount": 3,
+"text": "<speaker>Swawm</speaker>
+<dialog>Wow</dialog>
+<choiceJSON>{\"First\": 0, \"Second\": 1, \"Third\": 2}</choiceJSON>",
+"type": "line"
+},
+4: {
+"graph_offset": Vector2( 220, -200 ),
+"links": {
+0: 7
+},
+"rect_size": Vector2( 324, 137 ),
+"slot_amount": 1,
+"text": "<speaker>Swawm</speaker>
+<dialog>First</dialog>
+",
+"type": "line"
+},
+5: {
+"graph_offset": Vector2( 220, -40 ),
+"links": {
+0: 7
+},
+"rect_size": Vector2( 324, 137 ),
+"slot_amount": 1,
+"text": "<speaker>Swawm</speaker>
+<dialog>Second</dialog>
+",
+"type": "line"
+},
+6: {
+"graph_offset": Vector2( 220, 120 ),
+"links": {
+0: 7
+},
+"rect_size": Vector2( 324, 137 ),
+"slot_amount": 1,
+"text": "<speaker>Swawm</speaker>
+<dialog>Third</dialog>
+",
+"type": "line"
+},
+7: {
+"graph_offset": Vector2( 780, -40 ),
+"links": {
+
+},
+"rect_size": Vector2( 324, 137 ),
+"slot_amount": 1,
+"text": "<end>",
+"type": "line"
+}
+}
+}
+}
+available_dids = [  ]
+groups = [  ]
