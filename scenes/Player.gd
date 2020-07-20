@@ -1,4 +1,5 @@
 extends KinematicBody2D 
+class_name Player
 
 const FRICTION = 0.25
 const GRAVITY = 1000

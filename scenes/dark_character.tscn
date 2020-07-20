@@ -6,9 +6,19 @@
 script/source = "extends KinematicBody2D 
 
 onready var animation = $Animation
+onready var Player = get_tree().get_root().get_node(\"World\").get_node(\"Player\")
+onready var dialog = preload(\"res://scenes/Dialog_Player.tscn\")
 
 func _physics_process(delta):
 	animation.play(\"Idle\")
+	
+	
+func interaction_can_interact(interactionComponentParent : Node) -> bool:
+	return interactionComponentParent is Player
+	
+func interaction_interact(interactionComponentParent : Node) -> void:
+	var d = dialog.instance()
+	add_child(d) 
 "
 
 [sub_resource type="Animation" id=2]
@@ -29,6 +39,7 @@ tracks/0/keys = {
 
 [node name="Dark Character" type="KinematicBody2D"]
 position = Vector2( 2, 2 )
+collision_mask = 2147483656
 script = SubResource( 1 )
 
 [node name="Body" type="Sprite" parent="."]
@@ -39,3 +50,8 @@ hframes = 4
 
 [node name="Animation" type="AnimationPlayer" parent="."]
 anims/Idle = SubResource( 2 )
+
+[node name="Area" type="Area2D" parent="."]
+position = Vector2( -11, -1 )
+collision_layer = 8
+collision_mask = 8

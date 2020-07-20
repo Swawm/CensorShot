@@ -5,11 +5,10 @@
 [ext_resource path="res://scenes/Dialog_Player.gd" type="Script" id=3]
 [ext_resource path="res://scenes/Simulated_Registry.gd" type="Script" id=4]
 
-[sub_resource type="DynamicFont" id=4]
+[sub_resource type="DynamicFont" id=1]
 font_data = ExtResource( 1 )
 
-[sub_resource type="Animation" id=1]
-resource_name = "New Anim"
+[sub_resource type="Animation" id=2]
 length = 0.7
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:percent_visible")
@@ -24,14 +23,13 @@ tracks/0/keys = {
 "values": [ 0.0, 1.0 ]
 }
 
-[sub_resource type="DynamicFont" id=5]
+[sub_resource type="DynamicFont" id=3]
 font_data = ExtResource( 1 )
 
-[sub_resource type="DynamicFont" id=6]
+[sub_resource type="DynamicFont" id=4]
 font_data = ExtResource( 1 )
 
-[sub_resource type="Animation" id=2]
-resource_name = "Space"
+[sub_resource type="Animation" id=5]
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:rect_scale")
@@ -46,11 +44,10 @@ tracks/0/keys = {
 "values": [ Vector2( 1, 1 ), Vector2( 1.1, 1.1 ), Vector2( 1, 1 ) ]
 }
 
-[sub_resource type="DynamicFont" id=7]
+[sub_resource type="DynamicFont" id=6]
 font_data = ExtResource( 1 )
 
-[sub_resource type="Animation" id=3]
-resource_name = "Space"
+[sub_resource type="Animation" id=7]
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:rect_scale")
@@ -81,9 +78,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -94.0
-margin_top = -40.0
+margin_top = 2.0
 margin_right = 96.0
-margin_bottom = 40.0
+margin_bottom = 82.0
 rect_min_size = Vector2( 190, 80 )
 texture = ExtResource( 2 )
 patch_margin_left = 3
@@ -110,14 +107,14 @@ margin_right = 158.0
 margin_bottom = 10.0
 size_flags_horizontal = 3
 size_flags_vertical = 7
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 1 )
 text = "Test message"
 autowrap = true
 percent_visible = 0.0
 
 [node name="Body_AnimationPlayer" type="AnimationPlayer" parent="Dialog_Box/Body_NinePatchRect/MarginContainer/Body_Label"]
 autoplay = "New Anim"
-"anims/New Anim" = SubResource( 1 )
+"anims/New Anim" = SubResource( 2 )
 
 [node name="Speaker_NinePatch" type="NinePatchRect" parent="Dialog_Box/Body_NinePatchRect"]
 margin_left = -9.99999
@@ -136,7 +133,7 @@ __meta__ = {
 [node name="Speaker_Label" type="Label" parent="Dialog_Box/Body_NinePatchRect/Speaker_NinePatch"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-custom_fonts/font = SubResource( 5 )
+custom_fonts/font = SubResource( 3 )
 align = 1
 valign = 1
 __meta__ = {
@@ -164,7 +161,7 @@ __meta__ = {
 [node name="SpaceLabel" type="Label" parent="Dialog_Box/Body_NinePatchRect/Space_NinePatchRect"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-custom_fonts/font = SubResource( 6 )
+custom_fonts/font = SubResource( 4 )
 text = "Space"
 align = 1
 valign = 1
@@ -174,7 +171,7 @@ __meta__ = {
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Dialog_Box/Body_NinePatchRect/Space_NinePatchRect"]
 autoplay = "Space"
-anims/Space = SubResource( 2 )
+anims/Space = SubResource( 5 )
 
 [node name="Option_NinePatchRect" type="NinePatchRect" parent="Dialog_Box/Body_NinePatchRect"]
 anchor_left = 1.0
@@ -198,7 +195,7 @@ __meta__ = {
 [node name="OptionLabel" type="Label" parent="Dialog_Box/Body_NinePatchRect/Option_NinePatchRect"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-custom_fonts/font = SubResource( 7 )
+custom_fonts/font = SubResource( 6 )
 text = "Space"
 align = 1
 valign = 1
@@ -208,7 +205,7 @@ __meta__ = {
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Dialog_Box/Body_NinePatchRect/Option_NinePatchRect"]
 autoplay = "Space"
-anims/Space = SubResource( 3 )
+anims/Space = SubResource( 7 )
 
 [node name="Option_List" type="VBoxContainer" parent="Dialog_Box/Body_NinePatchRect"]
 anchor_left = 1.0
