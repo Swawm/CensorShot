@@ -16,6 +16,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 interaction_text_nodepath = NodePath("Label")
+interaction_default_text = "Interact"
 
 [node name="Label" type="Label" parent="."]
 margin_right = 51.0

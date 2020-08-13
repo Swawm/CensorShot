@@ -1,0 +1,73 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://scenes/menu/buttons.tscn" type="PackedScene" id=1]
+[ext_resource path="res://sprites/head.png" type="Texture" id=2]
+[ext_resource path="res://scenes/menu/Exit.tscn" type="PackedScene" id=3]
+[ext_resource path="res://fonts/Cave-Story.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://scenes/FadeIn.tscn" type="PackedScene" id=5]
+
+[sub_resource type="GDScript" id=2]
+
+[sub_resource type="DynamicFont" id=1]
+font_data = ExtResource( 4 )
+
+[node name="TitleScreen" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = SubResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Menu" type="VBoxContainer" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -123.0
+margin_top = -74.5
+margin_right = 123.0
+margin_bottom = 74.5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterRow" type="HBoxContainer" parent="Menu"]
+margin_right = 246.0
+margin_bottom = 149.0
+size_flags_vertical = 3
+
+[node name="Buttons" type="VBoxContainer" parent="Menu/CenterRow"]
+margin_right = 246.0
+margin_bottom = 149.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="New_Game" parent="Menu/CenterRow/Buttons" instance=ExtResource( 1 )]
+margin_right = 246.0
+
+[node name="Exit" parent="Menu/CenterRow/Buttons" instance=ExtResource( 3 )]
+margin_top = 44.0
+margin_right = 246.0
+margin_bottom = 84.0
+scene_to_load = ""
+
+[node name="head" type="Sprite" parent="Menu/CenterRow"]
+position = Vector2( 237, 24.5 )
+scale = Vector2( 10.4086, 9.36 )
+texture = ExtResource( 2 )
+
+[node name="Label" type="Label" parent="."]
+margin_left = 37.0
+margin_top = 103.5
+margin_right = 283.0
+margin_bottom = 113.5
+custom_fonts/font = SubResource( 1 )
+text = "Ver 0.0.1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="FadeIn" parent="." instance=ExtResource( 5 )]
+visible = false
+[connection signal="fade_finished" from="FadeIn" to="." method="_on_FadeIn_fade_finished"]

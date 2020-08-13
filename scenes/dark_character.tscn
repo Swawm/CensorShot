@@ -1,12 +1,11 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://sprites/nibba.png" type="Texture" id=1]
 
 [sub_resource type="GDScript" id=1]
-script/source = "extends KinematicBody2D 
+script/source = "extends StaticBody2D 
 
 onready var animation = $Animation
-onready var Player = get_tree().get_root().get_node(\"World\").get_node(\"Player\")
 onready var dialog = preload(\"res://scenes/Dialog_Player.tscn\")
 
 func _physics_process(delta):
@@ -17,8 +16,11 @@ func interaction_can_interact(interactionComponentParent : Node) -> bool:
 	return interactionComponentParent is Player
 	
 func interaction_interact(interactionComponentParent : Node) -> void:
-	var d = dialog.instance()
-	add_child(d) 
+	var d = \"res://scenes/Dialog_Player.tscn\"
+	get_tree().change_scene(d)
+	
+func interaction_get_text() -> String:
+	return \"Speak\" 
 "
 
 [sub_resource type="Animation" id=2]
@@ -37,9 +39,13 @@ tracks/0/keys = {
 "values": [ 0, 1, 2, 3, 0, 1, 2, 3 ]
 }
 
-[node name="Dark Character" type="KinematicBody2D"]
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 10, 8 )
+
+[node name="Dark Character" type="StaticBody2D"]
 position = Vector2( 2, 2 )
-collision_mask = 2147483656
+collision_layer = 8
+collision_mask = 2147483648
 script = SubResource( 1 )
 
 [node name="Body" type="Sprite" parent="."]
@@ -51,7 +57,6 @@ hframes = 4
 [node name="Animation" type="AnimationPlayer" parent="."]
 anims/Idle = SubResource( 2 )
 
-[node name="Area" type="Area2D" parent="."]
-position = Vector2( -11, -1 )
-collision_layer = 8
-collision_mask = 8
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( -4, 0 )
+shape = SubResource( 3 )

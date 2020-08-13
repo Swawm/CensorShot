@@ -19,6 +19,7 @@ var _Story_Reader
 
 # Virtual methods
 func _ready():
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	var Story_Reader_Class = load("res://addons/EXP-System-Dialog/Reference_StoryReader/EXP_StoryReader.gd")
 	_Story_Reader = Story_Reader_Class.new()
 	var story = load("res://stories/story_bake2.tres")
@@ -95,6 +96,8 @@ func _get_next_node(slot: int = 0):
 	
 	if _nid == _final_nid:
 		_Dialog_Box.visible = false
+		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+		get_tree().change_scene("res://levels/test.tscn")
 	pass
 	
 func _get_tagged_text(tag : String, text: String) -> String:
