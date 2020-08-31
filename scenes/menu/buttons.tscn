@@ -2,13 +2,13 @@
 
 [ext_resource path="res://fonts/Cave-Story.ttf" type="DynamicFontData" id=1]
 
-[sub_resource type="GDScript" id=2]
+[sub_resource type="GDScript" id=1]
 script/source = "extends Button
 
 export (String) var scene_to_load 
 "
 
-[sub_resource type="DynamicFont" id=1]
+[sub_resource type="DynamicFont" id=2]
 size = 36
 font_data = ExtResource( 1 )
 
@@ -17,7 +17,7 @@ margin_right = 130.0
 margin_bottom = 40.0
 rect_min_size = Vector2( 130, 40 )
 flat = true
-script = SubResource( 2 )
+script = SubResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -26,7 +26,7 @@ scene_to_load = "res://levels/test.tscn"
 [node name="Label" type="Label" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 2 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_offset_x = 5
 custom_constants/shadow_offset_y = 5

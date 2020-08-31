@@ -14,7 +14,6 @@ func _process(delta):
 
 # Signal triggered when our collider collides with something on the interaction layer
 func _on_InteractionComponent_body_entered(body):
-	print("entered")
 	var canInteract := false
 	
 	# GDScript lacks the concept of interfaces, so we can't check whether the body implements an interface
@@ -31,7 +30,6 @@ func _on_InteractionComponent_body_entered(body):
 	emit_signal("on_interactable_changed", interaction_target)
 
 func _on_InteractionComponent_body_exited(body):
-	print("left")
 	if (body == interaction_target):
 		interaction_target = null
 		emit_signal("on_interactable_changed", null)

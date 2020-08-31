@@ -2,10 +2,10 @@
 
 [ext_resource path="res://sprites/tilemap/tilemap.png" type="Texture" id=1]
 
-[sub_resource type="GDScript" id=1]
+[sub_resource type="GDScript" id=2]
 script/source = "extends StaticBody2D
 
-var is_open := false
+
 
 func _ready():
 	#Animation Putis
@@ -15,24 +15,27 @@ func interaction_can_interact(interactionComponentParent : Node) -> bool:
 	return interactionComponentParent is Player
 	
 func interaction_interact(interactionComponentParent : Node) -> void:
-	if !is_open:
-		$Sprite.set_frame_coords(Vector2(0,1)) 
-		is_open = true
+	get_tree().change_scene(\"res://levels/level1.tscn\")
+	pass
+	
+func interaction_get_text() -> String:
+	return \"Open\" 
 "
 
-[sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 11, 6 )
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 7, 9 )
 
-[node name="Chest" type="StaticBody2D"]
+[node name="Door" type="StaticBody2D"]
 collision_layer = 8
 collision_mask = 0
-script = SubResource( 1 )
+script = SubResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 1 )
 vframes = 4
 hframes = 4
+frame = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0, 2 )
-shape = SubResource( 2 )
+position = Vector2( 0, -1 )
+shape = SubResource( 1 )

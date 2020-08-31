@@ -17,6 +17,7 @@ func interaction_can_interact(interactionComponentParent : Node) -> bool:
 	
 func interaction_interact(interactionComponentParent : Node) -> void:
 	var d = \"res://scenes/Dialog_Player.tscn\"
+	Global.save_state()
 	get_tree().change_scene(d)
 	
 func interaction_get_text() -> String:

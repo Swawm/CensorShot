@@ -26,7 +26,9 @@ func _physics_process(delta):
 				animation.play("Run_fast (hands)")
 			else:
 				animation.play("Run_fast")
+# warning-ignore:shadowed_variable
 			var ACCELERATION = 300
+# warning-ignore:shadowed_variable
 			var MAX_SPEED = 100
 			motion.x += x_input * ACCELERATION * delta
 			motion.x = clamp(motion.x, -MAX_SPEED, MAX_SPEED)
@@ -111,3 +113,10 @@ func _physics_process(delta):
 			gun_sprite.rotation_degrees = 90
 		else: 
 			gun_sprite.rotation_degrees = 0
+
+func save():
+	var save_dict = {
+		"pos_x" : position.x,
+		"pos_y" : position.y,
+	}
+	return save_dict

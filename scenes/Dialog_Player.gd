@@ -97,7 +97,7 @@ func _get_next_node(slot: int = 0):
 	if _nid == _final_nid:
 		_Dialog_Box.visible = false
 		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
-		get_tree().change_scene("res://levels/test.tscn")
+		Global.load_state()
 	pass
 	
 func _get_tagged_text(tag : String, text: String) -> String:
