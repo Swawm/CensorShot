@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://fonts/Cave-Story.ttf" type="DynamicFontData" id=1]
-[ext_resource path="res://sprites/head.png" type="Texture" id=2]
+[ext_resource path="res://sprites/main_char.png" type="Texture" id=2]
 [ext_resource path="res://scenes/menu/Continue.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/menu/buttons.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/FadeIn.tscn" type="PackedScene" id=5]
@@ -92,6 +92,8 @@ scene_to_load = ""
 position = Vector2( 245.317, 21.62 )
 scale = Vector2( 8.3293, 8.53714 )
 texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 7, 16, 8, 7 )
 
 [node name="Name" type="Label" parent="."]
 margin_left = 35.0
