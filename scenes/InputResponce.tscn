@@ -1,0 +1,28 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://fonts/speaker_font.tres" type="DynamicFont" id=1]
+[ext_resource path="res://scripts/InputResponce.gd" type="Script" id=2]
+
+[node name="InputResponce" type="VBoxContainer"]
+margin_right = 285.0
+margin_bottom = 24.0
+custom_constants/separation = 0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="InputHistory" type="Label" parent="."]
+margin_right = 285.0
+margin_bottom = 10.0
+custom_fonts/font = ExtResource( 1 )
+custom_colors/font_color = Color( 0, 0.352941, 0.12549, 1 )
+text = "> Your Type"
+
+[node name="Responce" type="Label" parent="."]
+margin_top = 10.0
+margin_right = 285.0
+margin_bottom = 20.0
+custom_fonts/font = ExtResource( 1 )
+custom_colors/font_color = Color( 0.101961, 0.65098, 0.054902, 1 )
+text = "Responce"

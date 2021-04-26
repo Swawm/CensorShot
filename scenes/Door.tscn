@@ -2,7 +2,7 @@
 
 [ext_resource path="res://sprites/tilemap/tilemap.png" type="Texture" id=1]
 
-[sub_resource type="GDScript" id=2]
+[sub_resource type="GDScript" id=1]
 script/source = "extends StaticBody2D
 
 
@@ -22,13 +22,13 @@ func interaction_get_text() -> String:
 	return \"Open\" 
 "
 
-[sub_resource type="RectangleShape2D" id=1]
+[sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 7, 9 )
 
 [node name="Door" type="StaticBody2D"]
 collision_layer = 8
 collision_mask = 0
-script = SubResource( 2 )
+script = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 1 )
@@ -38,4 +38,4 @@ frame = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, -1 )
-shape = SubResource( 1 )
+shape = SubResource( 2 )

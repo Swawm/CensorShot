@@ -5,7 +5,7 @@
 [ext_resource path="res://sprites/tilemap/tilemap.png" type="Texture" id=3]
 [ext_resource path="res://sprites/tilemap/tileset.png" type="Texture" id=4]
 [ext_resource path="res://sprites/animated_grass.tres" type="Texture" id=5]
-[ext_resource path="res://scenes/dark_character.tscn" type="PackedScene" id=6]
+[ext_resource path="res://scenes/Computer.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scenes/Door.tscn" type="PackedScene" id=7]
 
 [sub_resource type="GDScript" id=1]
@@ -316,9 +316,6 @@ points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
 script = SubResource( 1 )
 scene_to_load = "res://levels/test.tscn"
 
-[node name="Dark Character" parent="." instance=ExtResource( 6 )]
-position = Vector2( 40, 56 )
-
 [node name="TileMap" parent="." instance=ExtResource( 2 )]
 z_index = -1
 tile_set = SubResource( 12 )
@@ -336,4 +333,8 @@ position = Vector2( -42, 55 )
 
 [node name="Door" parent="." instance=ExtResource( 7 )]
 position = Vector2( 60, 56 )
+z_index = -1
+
+[node name="Computer" parent="." instance=ExtResource( 6 )]
+position = Vector2( 4, 56 )
 z_index = -1

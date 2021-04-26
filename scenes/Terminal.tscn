@@ -1,0 +1,106 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://scripts/Input.gd" type="Script" id=1]
+[ext_resource path="res://fonts/speaker_font.tres" type="DynamicFont" id=2]
+[ext_resource path="res://scripts/Terminal.gd" type="Script" id=3]
+[ext_resource path="res://scripts/CommandProcessor.gd" type="Script" id=4]
+
+[sub_resource type="StyleBoxFlat" id=1]
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 0, 0, 0, 1 )
+
+[sub_resource type="StyleBoxFlat" id=3]
+bg_color = Color( 0.231373, 0.219608, 0.2, 1 )
+
+[sub_resource type="StyleBoxEmpty" id=4]
+
+[sub_resource type="StyleBoxEmpty" id=5]
+
+[node name="Terminal" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+max_lines_remembered = 15
+
+[node name="CommandProcessor" type="Node" parent="."]
+script = ExtResource( 4 )
+
+[node name="Background" type="PanelContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_styles/panel = SubResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MarginContainer" type="MarginContainer" parent="Background"]
+margin_right = 320.0
+margin_bottom = 180.0
+custom_constants/margin_right = 10
+custom_constants/margin_top = 10
+custom_constants/margin_left = 10
+custom_constants/margin_bottom = 10
+
+[node name="Rows" type="VBoxContainer" parent="Background/MarginContainer"]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 310.0
+margin_bottom = 170.0
+custom_constants/separation = 10
+
+[node name="GameInfo" type="PanelContainer" parent="Background/MarginContainer/Rows"]
+margin_right = 300.0
+margin_bottom = 130.0
+size_flags_vertical = 3
+custom_styles/panel = SubResource( 2 )
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Background/MarginContainer/Rows/GameInfo"]
+margin_right = 300.0
+margin_bottom = 130.0
+scroll_horizontal_enabled = false
+
+[node name="HistoryRows" type="VBoxContainer" parent="Background/MarginContainer/Rows/GameInfo/ScrollContainer"]
+margin_right = 285.0
+margin_bottom = 130.0
+rect_min_size = Vector2( 285, 130 )
+custom_constants/separation = 5
+
+[node name="InputArea" type="PanelContainer" parent="Background/MarginContainer/Rows"]
+margin_top = 140.0
+margin_right = 300.0
+margin_bottom = 160.0
+rect_min_size = Vector2( 0, 20 )
+custom_styles/panel = SubResource( 3 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Background/MarginContainer/Rows/InputArea"]
+margin_right = 300.0
+margin_bottom = 20.0
+
+[node name="Caret" type="Label" parent="Background/MarginContainer/Rows/InputArea/HBoxContainer"]
+margin_top = 5.0
+margin_right = 8.0
+margin_bottom = 15.0
+custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color = Color( 0.101961, 0.65098, 0.054902, 1 )
+text = " >"
+max_lines_visible = 1
+
+[node name="Input" type="LineEdit" parent="Background/MarginContainer/Rows/InputArea/HBoxContainer"]
+margin_left = 12.0
+margin_right = 300.0
+margin_bottom = 20.0
+size_flags_horizontal = 3
+custom_styles/focus = SubResource( 4 )
+custom_styles/normal = SubResource( 5 )
+custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color = Color( 0.101961, 0.65098, 0.054902, 1 )
+custom_constants/minimum_spaces = 5
+max_length = 48
+caret_blink = true
+script = ExtResource( 1 )
+[connection signal="text_entered" from="Background/MarginContainer/Rows/InputArea/HBoxContainer/Input" to="." method="_on_Input_text_entered"]
+[connection signal="text_entered" from="Background/MarginContainer/Rows/InputArea/HBoxContainer/Input" to="Background/MarginContainer/Rows/InputArea/HBoxContainer/Input" method="_on_Input_text_entered"]

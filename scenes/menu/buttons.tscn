@@ -21,7 +21,7 @@ script = SubResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-scene_to_load = "res://levels/test.tscn"
+scene_to_load = "res://levels/test2.tscn"
 
 [node name="Label" type="Label" parent="."]
 anchor_right = 1.0

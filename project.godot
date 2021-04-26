@@ -30,7 +30,6 @@ config/name="CensorShot"
 run/main_scene="res://levels/menu.tscn"
 config/use_custom_user_dir=true
 boot_splash/bg_color=Color( 0.764706, 0.443137, 0, 1 )
-config/icon="res://icon.png"
 
 [autoload]
 
