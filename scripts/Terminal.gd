@@ -29,7 +29,7 @@ func _on_Input_text_entered(new_text: String):
 func _ready():
 	scrollbar.connect("changed", self, "hande_scrollbar_changed")
 	var input_responce = InputResponce.instance()
-	input_responce.set_text("hello.sh", "Welcome to LFS terminal." + "\n" + "Print help for more info" + "\n" + "Don't forget to leave feedback at" + "\n" + "'http://34.73.15.119/'")
+	input_responce.set_text("hello.sh", "Welcome to LFS terminal." + "\n" + "Print help for more info" + "\n" + "Don't forget to leave feedback at" + "\n" + "http://34.73.15.119/")
 	history_rows.add_child(input_responce)
 	max_scroll_length = scrollbar.max_value
 	

@@ -22,7 +22,7 @@ func process_command(input: String):
 		'ls':
 			return 'open_door.sh' + "\n" + 'hello.sh'
 		'./hello.sh':
-			return "Welcome to LFS terminal." + "\n" + "Print help for more info" + "\n" + "Don't forget to leave feedback at" + "\n" + "'http://34.73.15.119/'"
+			return "Welcome to LFS terminal." + "\n" + "Print help for more info" + "\n" + "Don't forget to leave feedback at" + "\n" + "http://34.73.15.119/"
 			
 	if first_word != "help":
 		return "Error"
