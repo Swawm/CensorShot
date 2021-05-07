@@ -5,7 +5,7 @@
 [sub_resource type="GDScript" id=1]
 script/source = "extends StaticBody2D
 
-
+export var level_to_go: String
 
 func _ready():
 	#Animation Putis
@@ -15,7 +15,7 @@ func interaction_can_interact(interactionComponentParent : Node) -> bool:
 	return interactionComponentParent is Player
 	
 func interaction_interact(interactionComponentParent : Node) -> void:
-	get_tree().change_scene(\"res://levels/level1.tscn\")
+	get_tree().change_scene(level_to_go)
 	pass
 	
 func interaction_get_text() -> String:
@@ -32,8 +32,8 @@ script = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 1 )
-vframes = 4
 hframes = 4
+vframes = 4
 frame = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

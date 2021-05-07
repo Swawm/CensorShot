@@ -97,7 +97,6 @@ func _get_next_node(slot: int = 0):
 	if _nid == _final_nid:
 		_Dialog_Box.visible = false
 		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
-		Global.load_state()
 	pass
 	
 func _get_tagged_text(tag : String, text: String) -> String:
@@ -138,10 +137,8 @@ func _play_node():
 
 func _populate_choices(JSONtext: String):
 	var choices : Dictionary = parse_json(JSONtext)
-	print (choices)
 	for text in choices:
 		var slot = choices[text]
-		print (slot)
 		var new_option_button = _Option_Button_Scene.instance()
 		_Option_List.add_child(new_option_button)
 		new_option_button.slot = slot
